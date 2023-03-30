@@ -1,0 +1,59 @@
+<?php
+
+/* 
+ *  Mail : subinpvasu@gmail.com
+ *  Skype : subinpvasu 
+ *  Author : SUBIN P VASU, Freelance Google Ads(AdWords) API Developer - PHP, Python
+ *  Created On : 23-Aug-2020 
+ */
+
+
+////echo phpinfo();
+//echo '<pre>';
+//print_r($_REQUEST);
+//print_r($_FILES);
+//
+$base = 'C:\Users\subin\Downloads\bck';
+start:
+$files = scandir($base);
+$i = 0;
+foreach ($files as $file) {
+//    $i++;
+//    if($i>1000)
+//    {
+//        break;
+//    }
+    
+    if(!preg_match('/\./', $file))
+    {
+        $url = $base.'\\'.$file;      
+        if(is_dir($url))
+            {
+                scanfiles($url);
+            }
+    }
+    else if(preg_match('/^\./', $file))
+    {
+//        echo unlink($base.'\\'.$file);
+        echo $base.'\\'.$file.'<br/>';
+    }
+}
+function scanfiles($url)
+{
+    $files = scandir($url);    
+    foreach ($files as $file) {        
+        if(!preg_match('/\./', $file))
+        {
+            $base = $url.'\\'.$file;     
+            if(is_dir($base))
+            {
+                scanfiles($base);
+            }
+        }
+        else if(preg_match('/^\./', $file))
+        {
+    //        echo unlink($base.'\\'.$file);
+            echo $url.'\\'.$file.'<br/>';
+        }
+    }
+}
